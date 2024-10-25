@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   root 'lists#index'
-  resources :lists, param: :name, only: [:index,:show, :create]
-  resources :tasks, only: [:create, :update]
+
+  resources :lists, param: :name do
+    resources :tasks
+  end
+  
+  resources :tasks, only: [:index,:show, :create, :update]
+
+  
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

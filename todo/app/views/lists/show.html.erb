@@ -1,31 +1,32 @@
 <h1><%= @list.name %></h1>
 
 <h3>To do</h3>
-<%= form_with url: tasks_path, local: true do |form| %>
-  <%= form.hidden_field :list_id, value: @list.id %>
-  <%= form.text_area :description, placeholder: "Nova tarefa" %>
+<%= form_with url: list_tasks_path(@list), local: true do |form| %>
+  <%= form.hidden_field :name, value: @list.name %> 
+  
+  <%= form.fields_for :task do |task_form| %>
+    <%= task_form.text_area :description, placeholder: "Nova tarefa" %>
+  <% end %>
+
   <%= form.submit "+" %>
 <% end %>
-
+<h3>To do</h3>
 <div>
-  <select>
-    <% @todo_tasks.each do |task| %>
-      <option>
-        <%= task.description %> 
-        <%= button_to "Check", task_path(task), method: :put %>
-      </option>
-    <% end %>
-  </select>
+  <% @todo_tasks.each do |task| %>
+    <div>
+      <%= task.description %>
+      <%= button_to "Check", task_path(task), method: :put %>
+    </div>
+  <% end %>
 </div>
 
-<h3>Feitos</h3>
+<h3>FeitosS</h3>
 <div>
-  <select>
-    <% @completed_tasks.each do |task| %>
-      <option>
-        <%= task.description %> 
-        <%= button_to "Uncheck", task_path(task), method: :put %>
-      </option>
-    <% end %>
-  </select>
+  <% @completed_tasks.each do |task| %>
+    <div>
+      <%= task.description %>
+      <%= button_to "Uncheck", task_path(task), method: :put %>
+    </div>
+  <% end %>
 </div>
+
