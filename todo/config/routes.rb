@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'lists#index'
-  resources :lists, param: :name, only: [:show, :create]
+  resources :lists, param: :name, only: [:index,:show, :create]
   resources :tasks, only: [:create, :update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
