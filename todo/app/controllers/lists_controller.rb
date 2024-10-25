@@ -9,9 +9,12 @@
 
     def show
       @list = List.find_by(name: params[:name])
-      Rails.logger.debug("AAA list: #{params[:name]}")
-      @todo_tasks = @list.tasks.todos
-      @completed_tasks = @list.tasks.completed
+      if(@list)
+        @todo_tasks = @list.tasks.todos
+        @completed_tasks = @list.tasks.completed
+      else
+        redirect_to root_path, alert: "Página não existente"
+      end
     end
 
     def create

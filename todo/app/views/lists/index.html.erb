@@ -1,16 +1,22 @@
-<div style="display: flex;">
-  <div style="width: 50%;">
-    <h3>Entrar em lista existente</h3>
-   <%= form_with url: lists_path, method: :get, local: true do |form| %>
-      <%= text_field_tag :name, nil, placeholder: "Digite o nome da lista" %>
-      <%= submit_tag "Entrar" %>
-    <% end %>
+ <% if flash[:alert] %>
+    <div class="flash-alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+  
+<div class="forms-container">
+    <div class="form-section">
+      <h3 class="form-title">Entrar em lista existente</h3>
+      <%= form_with url: lists_path, method: :get, local: true, class: "list-form" do |form| %>
+        <%= text_field_tag :name, nil, placeholder: "Digite o nome da lista", class: "form-input" %>
+        <%= submit_tag "Entrar", class: "form-button" %>
+      <% end %>
+    </div>
+
+    <div class="form-section">
+      <h3 class="form-title">Criar nova lista</h3>
+      <%= form_with(model: @list, local: true, class: "list-form") do |form| %>
+        <%= form.text_field :name, placeholder: "Nome da lista", class: "form-input" %>
+        <%= form.submit "Criar", class: "form-button" %>
+      <% end %>
   </div>
-  <div style="width: 50%;">
-    <h3>Criar nova lista</h3>
-    <%= form_with(model: @list, local: true) do |form| %>
-      <%= form.text_field :name, placeholder: "Nome da lista" %>
-      <%= form.submit "Criar" %>
-    <% end %>
-  </div>
-</div>

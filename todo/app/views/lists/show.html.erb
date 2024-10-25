@@ -1,32 +1,37 @@
-<h1><%= @list.name %></h1>
+<div class="container">
+    <h1 class="page-title"><%= @list.name %></h1>
 
-<h3>To do</h3>
-<%= form_with url: list_tasks_path(@list), local: true do |form| %>
-  <%= form.hidden_field :name, value: @list.name %> 
-  
-  <%= form.fields_for :task do |task_form| %>
-    <%= task_form.text_area :description, placeholder: "Nova tarefa" %>
-  <% end %>
+    <%= form_with url: list_tasks_path(@list), local: true, class: "task-form" do |form| %>
+      <%= form.hidden_field :name, value: @list.name %>
 
-  <%= form.submit "+" %>
-<% end %>
-<h3>To do</h3>
-<div>
-  <% @todo_tasks.each do |task| %>
-    <div>
-      <%= task.description %>
-      <%= button_to "Check", task_path(task), method: :put %>
+      <%= form.fields_for :task do |task_form| %>
+        <%= task_form.text_area :description, placeholder: "Nova tarefa", class: "task-input" %>
+      <% end %>
+
+      <%= form.submit "+", class: "add-button" %>
+    <% end %>
+
+    <h3 class="section-title">À fazer</h3>
+    <div class="grid-container">
+      <% @todo_tasks.each do |task| %>
+        <div class="task-card">
+          <div class="task-card-body">
+            <h5 class="task-description"><%= task.description %></h5>
+            <%= button_to "OK", task_path(task), method: :put, class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
 
-<h3>FeitosS</h3>
-<div>
-  <% @completed_tasks.each do |task| %>
-    <div>
-      <%= task.description %>
-      <%= button_to "Uncheck", task_path(task), method: :put %>
+    <h3 class="section-title">Feitos</h3>
+    <div class="grid-container">
+      <% @completed_tasks.each do |task| %>
+        <div class="task-card">
+          <div class="task-card-body">
+            <h5 class="task-description"><%= task.description %></h5>
+            <%= button_to "Desfazer", task_path(task), method: :put, class: "btn btn-warning" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
-
+  </div>

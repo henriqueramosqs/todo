@@ -3,7 +3,7 @@ class TasksController < ApplicationController
     def create
       @list = List.find_by(name: params[:name])
       Rails.logger.debug("AAA name: #{params[:name]}")
-      Rails.logger.debug("Parameters received: #{params.inspect}")
+      Rails.logger.debug("Params: #{params.inspect}")
 
       @task = @list.tasks.new(task_params)
       @task.done = false
@@ -24,8 +24,8 @@ class TasksController < ApplicationController
     private
 
     def task_params
-      Rails.logger.debug("Parameters received: #{params.inspect}")
-      Rails.logger.debug("Parameters EEEE: #{params["[task]"]}")
+      Rails.logger.debug("Params: #{params.inspect}")
+      Rails.logger.debug("Params EEEE: #{params["[task]"]}")
       params.require("[task]").permit(:description)
     end
   end
