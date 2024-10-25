@@ -1,0 +1,16 @@
+<div style="display: flex;">
+  <div style="width: 50%;">
+    <h3>Entrar em lista existente</h3>
+    <%= form_tag lists_path, method: :get do %>
+      <%= text_field_tag :name, nil, placeholder: "Digite o nome da lista" %>
+      <%= submit_tag "Entrar" %>
+    <% end %>
+  </div>
+  <div style="width: 50%;">
+    <h3>Criar nova lista</h3>
+    <%= form_with(model: @list, local: true) do |form| %>
+      <%= form.text_field :name, placeholder: "Nome da lista" %>
+      <%= form.submit "Criar" %>
+    <% end %>
+  </div>
+</div>

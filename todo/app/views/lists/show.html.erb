@@ -1,0 +1,31 @@
+<h1><%= @list.name %></h1>
+
+<h3>To do</h3>
+<%= form_with url: tasks_path, local: true do |form| %>
+  <%= form.hidden_field :list_id, value: @list.id %>
+  <%= form.text_area :description, placeholder: "Nova tarefa" %>
+  <%= form.submit "+" %>
+<% end %>
+
+<div>
+  <select>
+    <% @todo_tasks.each do |task| %>
+      <option>
+        <%= task.description %> 
+        <%= button_to "Check", task_path(task), method: :put %>
+      </option>
+    <% end %>
+  </select>
+</div>
+
+<h3>Feitos</h3>
+<div>
+  <select>
+    <% @completed_tasks.each do |task| %>
+      <option>
+        <%= task.description %> 
+        <%= button_to "Uncheck", task_path(task), method: :put %>
+      </option>
+    <% end %>
+  </select>
+</div>
