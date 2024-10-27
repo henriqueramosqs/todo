@@ -14,6 +14,8 @@
  *= require_self
  */
 
+
+
 .container {
 max-width: 1000px;
 margin: 0 auto;
@@ -128,7 +130,7 @@ background-color: #27ae60;
 
 .btn-warning {
 background-color: #f1c40f;
-color: #2c3e50;
+color: white;
 }
 
 .btn-warning:hover {

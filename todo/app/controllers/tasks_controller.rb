@@ -14,7 +14,7 @@ class TasksController < ApplicationController
         redirect_to list_path(@list.name)
       end
     end
-
+    
     def update
       @task = Task.find(params[:id])
       @task.update(done: !@task.done)
